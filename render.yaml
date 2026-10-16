@@ -15,7 +15,7 @@ services:
     # Pin a cloud model as well as the engine. The repository's default model
     # is local-only, so omitting this would make `jarvis serve` reject the
     # otherwise healthy cloud engine during startup.
-    dockerCommand: serve --host 0.0.0.0 --port 10000 --engine cloud --model gpt-4o-mini
+    dockerCommand: serve --host 0.0.0.0 --port 10000 --engine nim --model openai/gpt-oss-20b
     healthCheckPath: /health
     autoDeploy: true
     envVars:
@@ -37,9 +37,9 @@ services:
       # are operator-supplied secrets; using one provider here keeps the
       # one-click contract deterministic instead of incorrectly requiring a
       # key for every supported cloud provider.
-      - key: OPENAI_API_KEY
+      - key: NIM_API_KEY
         sync: false
-
+        
       # The free service filesystem is ephemeral. OpenJarvis state under this
       # directory is lost on every restart, spin-down, or deploy. See
       # docs/deployment/render.md before storing credentials or durable state.
